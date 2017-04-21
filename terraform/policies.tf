@@ -96,3 +96,24 @@ resource "aws_iam_policy" "self_manage_iam_user" {
     description = "Allows the user to manage their own credentials and list all users"
     policy = "${data.aws_iam_policy_document.self_manage_iam_user.json}"
 }
+
+data "aws_iam_policy_document" "create_users" {
+    statement {
+        sid = "AllowCreatingUsers"
+        effect = "Allow"
+        actions = [
+            "iam:CreateUser",
+            "iam:AddUserToGroup",
+            "iam:CreateLoginProfile"
+        ]
+        resources = [
+            "*"
+        ]
+    }
+}
+
+resource "aws_iam_policy" "create_users" {
+    name = "create_users"
+    description = "Allow creating users"
+    policy = "${data.aws_iam_policy_document.create_users.json}"
+}
