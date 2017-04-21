@@ -87,3 +87,25 @@ resource "aws_iam_policy" "self-manage-iam-user" {
 }
 EOF
 }
+
+resource "aws_iam_policy" "create-users" {
+    name        = "create-users"
+    description = "Allow creating users"
+    policy      = <<EOF
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AllowCreatingUsers"
+            "Effect": "Allow",
+            "Action": [
+                "iam:CreateUser",
+                "iam:AddUserToGroup",
+                "iam:CreateLoginProfile"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
+EOF
+}
