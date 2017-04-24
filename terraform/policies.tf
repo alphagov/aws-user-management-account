@@ -21,6 +21,7 @@ EOF
 
 resource "aws_iam_policy" "self-manage-iam-user" {
     name = "self-manage-iam-user"
+    description = "Allows the user to manage their own credentials and list all users"
     policy = <<EOF
 {
     "Version": "2012-10-17",
