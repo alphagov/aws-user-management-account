@@ -1,5 +1,3 @@
-data "aws_caller_identity" "current" {}
-
 resource "aws_iam_policy" "assume-any-role" {
     name = "assume-any-role"
     description = "Allows the user to call sts:AssumeRole on anything"
