@@ -1,22 +1,21 @@
 data "aws_caller_identity" "current" {}
 
+data "aws_iam_policy_document" "assume_any_role" {
+    statement {
+        effect = "Allow"
+        actions = [
+            "sts:AssumeRole",
+        ]
+        resources = [
+            "*",
+        ]
+    }
+}
+
 resource "aws_iam_policy" "assume-any-role" {
     name = "assume-any-role"
     description = "Allows the user to call sts:AssumeRole on anything"
-    policy = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Action": [
-        "sts:AssumeRole"
-      ],
-      "Effect": "Allow",
-      "Resource": "*"
-    }
-  ]
-}
-EOF
+    policy = "${data.aws_iam_policy_document.assume_any_role.json}"
 }
 
 resource "aws_iam_policy" "self-manage-iam-user" {
