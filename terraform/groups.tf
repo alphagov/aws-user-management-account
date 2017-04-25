@@ -19,3 +19,12 @@ resource "aws_iam_group_policy_attachment" "administrators-policy" {
     group = "${aws_iam_group.administrators.name}"
     policy_arn = "arn:aws:iam::aws:policy/IAMFullAccess"
 }
+
+resource "aws_iam_group" "leavers" {
+  name = "Leavers"
+}
+
+resource "aws_iam_group_policy_attachment" "leavers_deny_all" {
+  group = "${aws_iam_group.leavers.name}"
+  policy_arn = "${aws_iam_policy.deny_all.arn}"
+}
