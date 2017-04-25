@@ -96,3 +96,22 @@ resource "aws_iam_policy" "self_manage_iam_user" {
     description = "Allows the user to manage their own credentials and list all users"
     policy = "${data.aws_iam_policy_document.self_manage_iam_user.json}"
 }
+
+data "aws_iam_policy_document" "deny_all" {
+  statement {
+    sid = "DenyAllAPIAccess"
+    effect = "Deny"
+    actions = [
+      "*:*",
+    ]
+    resources = [
+      "*",
+    ]
+  }
+}
+
+resource "aws_iam_policy" "deny_all" {
+  name = "deny_all"
+  description = "Disallows all calls to AWS APIs"
+  policy = "${data.aws_iam_policy_document.deny_all.json}"
+}
