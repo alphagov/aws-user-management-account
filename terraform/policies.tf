@@ -60,7 +60,7 @@ data "aws_iam_policy_document" "self_manage_iam_user" {
     }
 
     statement = {
-        sid = "AllowUsersToDeactivateTheirOwnVirtualMFADevice"
+        sid = "RequireMFAWhenUsersDeactivateTheirOwnVirtualMFADevice"
         effect = "Allow"
         actions = [
             "iam:DeactivateMFADevice"
