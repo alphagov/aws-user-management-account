@@ -97,7 +97,7 @@ resource "aws_iam_policy" "self_manage_iam_user" {
 
 data "aws_iam_policy_document" "create_users" {
     statement {
-        sid = "AllowCreatingUsers"
+        sid = "AllowCreatingUsersAndLogging"
         effect = "Allow"
         actions = [
             "iam:CreateUser",

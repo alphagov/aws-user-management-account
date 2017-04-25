@@ -1,6 +1,13 @@
 import boto3
+import logging
 import string
 from secrets import choice
+
+
+logger = logging.getLogger()
+# We're leaving this as WARN rather than INFO because boto logs all API calls
+# with all params, which means we'd be logging the password.
+logger.setLevel(logging.WARN)
 
 
 def generate_password():
@@ -22,8 +29,11 @@ def create_user(event, context):
     We'd like to send them an email with instructions to get set up and send
     their password via another contact method too, but for now return it.
     '''
+    username = event['username']
+    logger.warn('create_user called with username {}'.format(username))
+
     iam = boto3.resource('iam')
-    user = iam.User(event['username'])
+    user = iam.User(username)
     user.create()
     user.add_group(GroupName='CrossAccountAccess')
 

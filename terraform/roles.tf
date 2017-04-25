@@ -23,3 +23,8 @@ resource "aws_iam_role_policy_attachment" "lambda-attach-create-users" {
     role       = "${aws_iam_role.lambda_manage_users.name}"
     policy_arn = "${aws_iam_policy.create_users.arn}"
 }
+
+resource "aws_iam_role_policy_attachment" "aws_basic_lambda_execution_role" {
+    role       = "${aws_iam_role.lambda_manage_users.name}"
+    policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+}
