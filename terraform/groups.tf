@@ -4,11 +4,11 @@ resource "aws_iam_group" "cross-account-access" {
 
 resource "aws_iam_group_policy_attachment" "cross-account-attach-self-manage" {
     group = "${aws_iam_group.cross-account-access.name}"
-    policy_arn = "${aws_iam_policy.self-manage-iam-user.arn}"
+    policy_arn = "${aws_iam_policy.self_manage_iam_user.arn}"
 }
 resource "aws_iam_group_policy_attachment" "cross-account-attach-assume-role" {
     group = "${aws_iam_group.cross-account-access.name}"
-    policy_arn = "${aws_iam_policy.assume-any-role.arn}"
+    policy_arn = "${aws_iam_policy.assume_any_role.arn}"
 }
 
 resource "aws_iam_group" "administrators" {
