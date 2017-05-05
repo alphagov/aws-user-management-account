@@ -6,14 +6,10 @@ variable "cloudtrail_s3_bucket_name" {
   type = "string"
 }
 
-variable "cloudtrail_s3_bucket_prefix" {
-  type = "string"
-}
-
 module "aws_security_alarms" {
   source                      = "github.com/alphagov/aws-security-alarms/terraform"
   cloudtrail_s3_bucket_name   = "${var.cloudtrail_s3_bucket_name}"
-  cloudtrail_s3_bucket_prefix = "${var.cloudtrail_s3_bucket_prefix}"
+  cloudtrail_s3_bucket_prefix = "${data.aws_caller_identity.current.account_id}"
 }
 
 module "root_activity" {
