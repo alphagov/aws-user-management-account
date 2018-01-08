@@ -1,3 +1,7 @@
+.venv
+.ruby-version
+terraform/terraform.tf
+
 # Created by https://www.gitignore.io/api/terraform
 
 ### Terraform ###
