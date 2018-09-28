@@ -25,6 +25,10 @@ data "aws_iam_policy_document" "self_manage_iam_user" {
     effect = "Allow"
 
     actions = [
+      "iam:GetUser",
+      "iam:ListUserPolicies",
+      "iam:ListAttachedUserPolicies",
+      "iam:ListGroupsForUser",
       "iam:*LoginProfile",
       "iam:*AccessKey*",
       "iam:*SSHPublicKey*",
@@ -43,6 +47,9 @@ data "aws_iam_policy_document" "self_manage_iam_user" {
       "iam:GetAccountSummary",
       "iam:GetAccountPasswordPolicy",
       "iam:ListUsers",
+      "iam:ListGroups",
+      "iam:ListGroupPolicies",
+      "iam:ListAttachedGroupPolicies",
     ]
 
     resources = [
