@@ -58,18 +58,29 @@ data "aws_iam_policy_document" "self_manage_iam_user" {
   }
 
   statement {
-    sid    = "AllowUsersToCreateEnableResyncDeleteTheirOwnVirtualMFADevice"
+    sid    = "AllowUsersToCreateMFADevices"
     effect = "Allow"
 
     actions = [
       "iam:CreateVirtualMFADevice",
-      "iam:EnableMFADevice",
-      "iam:ResyncMFADevice",
-      "iam:DeleteVirtualMFADevice",
     ]
 
     resources = [
-      "arn:aws:iam::${data.aws_caller_identity.current.account_id}:mfa/$${aws:username}",
+      "arn:aws:iam::${data.aws_caller_identity.current.account_id}:mfa/*",
+    ]
+  }
+
+  statement {
+    sid    = "AllowUsersToEnableResyncTheirOwnVirtualMFADevice"
+    effect = "Allow"
+
+    actions = [
+      "iam:EnableMFADevice",
+      "iam:ResyncMFADevice",
+    ]
+
+    resources = [
+      "arn:aws:iam::${data.aws_caller_identity.current.account_id}:mfa/*",
       "arn:aws:iam::${data.aws_caller_identity.current.account_id}:user/$${aws:username}",
     ]
   }
@@ -83,7 +94,7 @@ data "aws_iam_policy_document" "self_manage_iam_user" {
     ]
 
     resources = [
-      "arn:aws:iam::${data.aws_caller_identity.current.account_id}:mfa/$${aws:username}",
+      "arn:aws:iam::${data.aws_caller_identity.current.account_id}:mfa/*",
       "arn:aws:iam::${data.aws_caller_identity.current.account_id}:user/$${aws:username}",
     ]
 
