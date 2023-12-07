@@ -77,6 +77,7 @@ data "aws_iam_policy_document" "self_manage_iam_user" {
 
     actions = [
       "iam:EnableMFADevice",
+      "iam:GetMFADevice",
       "iam:ResyncMFADevice",
     ]
 
